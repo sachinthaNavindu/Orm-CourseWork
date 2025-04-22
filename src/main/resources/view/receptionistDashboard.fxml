@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.therapycenter.controller.ReceptionistDashController">
+   <children>
+      <VBox prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: #F2E8CF;">
+         <children>
+            <HBox alignment="CENTER" prefHeight="70.0" style="-fx-background-color: #3C3B54;">
+               <children>
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#navDash" prefHeight="45.0" style="-fx-background-color: transparent;" text="Dashboard" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </HBox>
+            <VBox spacing="3.0" VBox.vgrow="ALWAYS">
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+               <children>
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#navAppoinments" prefHeight="45.0" style="-fx-background-color: transparent;" text="Appointments" textFill="#735b5b">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#navSessions" prefHeight="45.0" style="-fx-background-color: transparent;" text="Sessions" textFill="#735b5b">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#navBilling" prefHeight="45.0" style="-fx-background-color: transparent;" text="Payments" textFill="#735b5b">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#navReports" prefHeight="45.0" style="-fx-background-color: transparent;" text="Reports" textFill="#735b5b">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#navPatitnt" prefHeight="45.0" style="-fx-background-color: transparent;" text="Patients" textFill="#735b5b">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </VBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" style="-fx-background-color: #F2E8CF;">
+               <children>
+                  <Region prefHeight="50.0" prefWidth="15.0" />
+                  <VBox prefHeight="50.0" prefWidth="44.0" />
+                  <Label prefHeight="27.0" prefWidth="63.0" text="Logout" textFill="#4a6bff">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+         <effect>
+            <DropShadow height="20.0" radius="9.5" width="20.0">
+               <color>
+                  <Color opacity="0.15" />
+               </color>
+            </DropShadow>
+         </effect>
+      </VBox>
+
+      <AnchorPane fx:id="loadPageAnchor" layoutX="200.0" prefHeight="600.0" prefWidth="800.0">
+         <children>
+            <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #89CFF0;">
+               <padding>
+                  <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
+               </padding>
+               <children>
+                  <Label prefHeight="158.0" prefWidth="202.0" style="-fx-font-weight: bold;" text="Therapy Center" textFill="#4b3e3e">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="20.0" />
+                     </padding>
+                  </Label>
+
+                  <HBox alignment="CENTER" prefHeight="183.0" prefWidth="742.0" spacing="20.0">
+                     <children>
+                        <VBox alignment="CENTER" minHeight="150.0" minWidth="170.0" style="-fx-background-color: white; -fx-background-radius: 8;">
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                           <children>
+                              <Label text="Appointments">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="appointmentsCount" style="-fx-font-weight: bold;" text="0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="5.0" />
+                                 </padding>
+                              </Label>
+                              <ProgressBar fx:id="appointmentsProgress" prefWidth="150.0" progress="0" style="-fx-accent: #3498db; -fx-background-color: #e0e0e0; -fx-border-radius: 5; -fx-border-color: #3498db;" />
+                           </children>
+                           <effect>
+                              <DropShadow height="10.0" radius="4.5" width="10.0">
+                                 <color>
+                                    <Color opacity="0.1" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </VBox>
+                        <VBox alignment="CENTER" minHeight="150.0" minWidth="170.0" style="-fx-background-color: white; -fx-background-radius: 8;">
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                           <children>
+                              <Label text="Patients">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="patientsCount" style="-fx-font-weight: bold;" text="0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="5.0" />
+                                 </padding>
+                              </Label>
+                              <ProgressBar fx:id="patientsProgress" prefWidth="150.0" progress="0" style="-fx-accent: #e74c3c; -fx-background-color: #e0e0e0; -fx-border-radius: 5; -fx-border-color: #e74c3c;" />
+                           </children>
+                           <effect>
+                              <DropShadow height="10.0" radius="4.5" width="10.0">
+                                 <color>
+                                    <Color opacity="0.1" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </VBox>
+                        <VBox alignment="CENTER" minHeight="150.0" minWidth="170.0" style="-fx-background-color: white; -fx-background-radius: 8;">
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                           <children>
+                              <Label text="Sessions Today">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="sessionsCount" style="-fx-font-weight: bold;" text="0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="5.0" />
+                                 </padding>
+                              </Label>
+                              <ProgressBar fx:id="sessionsProgress" prefWidth="150.0" progress="0" style="-fx-accent: #2ecc71; -fx-background-color: #e0e0e0; -fx-border-radius: 5; -fx-border-color: #2ecc71;" />
+                           </children>
+                           <effect>
+                              <DropShadow height="10.0" radius="4.5" width="10.0">
+                                 <color>
+                                    <Color opacity="0.1" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </VBox>
+                        <VBox alignment="CENTER" minHeight="150.0" minWidth="170.0" style="-fx-background-color: white; -fx-background-radius: 8;">
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                           <children>
+                              <Label text="Pending Bills">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="billsCount" style="-fx-font-weight: bold;" text="0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="5.0" />
+                                 </padding>
+                              </Label>
+                              <ProgressBar fx:id="billsProgress" prefWidth="150.0" progress="0" style="-fx-accent: #9b59b6; -fx-background-color: #e0e0e0; -fx-border-radius: 5; -fx-border-color: #9b59b6;" />
+                           </children>
+                           <effect>
+                              <DropShadow height="10.0" radius="4.5" width="10.0">
+                                 <color>
+                                    <Color opacity="0.1" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
