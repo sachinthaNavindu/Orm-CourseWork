@@ -119,9 +119,13 @@ public class PatientController implements Initializable {
             cmbGender.setValue(null);
             dpRegDate.setText(null);
             this.id = String.valueOf(patientBO.getLastPK().orElse("Error"));
+            lblPatientId.setText(this.id);
             loadPatientTable();
+            new Alert(Alert.AlertType.INFORMATION, "Saved").show();
+            reset();
         } else {
-            System.out.println("Failed to save patient");
+            new Alert(Alert.AlertType.ERROR,"Patient save failed").show();
+            reset();
         }
 
     }
@@ -139,8 +143,10 @@ public class PatientController implements Initializable {
             lblPatientId.setText(id);
             dpRegDate.setDisable(false);
             loadPatientTable();
+            reset();
         } else {
             System.out.println("Failed to delete patient");
+            reset();
         }
     }
 
@@ -213,8 +219,10 @@ public class PatientController implements Initializable {
 
             if (isUpdated) {
                 loadPatientTable();
+                reset();
             } else {
                 System.out.println("Failed to update patient");
+                reset();
             }
 
         } else {
@@ -226,10 +234,15 @@ public class PatientController implements Initializable {
         }
     }
 
+    private void reset(){
+        dpRegDate.setText(String.valueOf(LocalDate.now()));
+        cmbGender.getItems().clear();
+        cmbGender.getItems().addAll("Male", "Female");
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        dpRegDate.setText(String.valueOf(LocalDate.now()));
-        cmbGender.getItems().addAll("Male", "Female");
+        reset();
         this.id = String.valueOf(patientBO.getLastPK().orElse("Error"));
         lblPatientId.setText(id);
 

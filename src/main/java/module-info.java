@@ -8,13 +8,19 @@ module edu.ijse.therapycenter.therapycenter {
     requires modelmapper;
     requires bcrypt;
     requires java.desktop;
+    requires java.sql;
 
-    // Open packages for FXML and Hibernate
+    // Use the automatic module name from the JAR file
+    requires net.sf.jasperreports.core;
+
+    // Jackson dependencies
+    requires com.fasterxml.jackson.databind;
+    requires com.fasterxml.jackson.core;
+    requires com.fasterxml.jackson.annotation;
+
     opens edu.ijse.therapycenter to javafx.fxml;
     opens edu.ijse.therapycenter.controller to javafx.fxml;
     opens edu.ijse.therapycenter.entity to org.hibernate.orm.core;
-
-    // NEW: Open DTO package to JavaFX for reflection access
     opens edu.ijse.therapycenter.dto to javafx.base;
 
     exports edu.ijse.therapycenter;

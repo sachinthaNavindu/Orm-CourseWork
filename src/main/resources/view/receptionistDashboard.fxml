@@ -48,17 +48,6 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#navSessions" prefHeight="45.0" style="-fx-background-color: transparent;" text="Sessions" textFill="#735b5b">
-                     <font>
-                        <Font name="System Bold" size="17.0" />
-                     </font>
-                     <padding>
-                        <Insets left="20.0" />
-                     </padding>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
                   <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#navBilling" prefHeight="45.0" style="-fx-background-color: transparent;" text="Payments" textFill="#735b5b">
                      <font>
                         <Font name="System Bold" size="17.0" />
@@ -98,7 +87,7 @@
                <children>
                   <Region prefHeight="50.0" prefWidth="15.0" />
                   <VBox prefHeight="50.0" prefWidth="44.0" />
-                  <Label prefHeight="27.0" prefWidth="63.0" text="Logout" textFill="#4a6bff">
+                  <Label fx:id="btnLogOut" onMouseClicked="#clickLogOut" prefHeight="27.0" prefWidth="63.0" text="Logout" textFill="#4a6bff">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>

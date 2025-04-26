@@ -13,7 +13,6 @@ public class FactoryConfiguration {
     private final SessionFactory sessionFactory;
 
     private FactoryConfiguration() {
-        // Programmatic configuration
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySetting("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver")
                 .applySetting("hibernate.connection.url", "jdbc:mysql://localhost:3306/TherapyCenter?createDatabaseIfNotExist=true")
@@ -45,4 +44,8 @@ public class FactoryConfiguration {
     public Session getSession() {
         return sessionFactory.openSession();
     }
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
 }

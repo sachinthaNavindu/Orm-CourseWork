@@ -7,6 +7,7 @@ import edu.ijse.therapycenter.bo.custom.impl.PaymentBOImpl;
 import edu.ijse.therapycenter.dto.PatientDTO;
 import edu.ijse.therapycenter.dto.PaymentDTO;
 import edu.ijse.therapycenter.dto.TherapySessionDTO;
+import edu.ijse.therapycenter.util.PaymentReport;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -63,9 +64,7 @@ public class PaymentController implements Initializable {
         colAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
 
-        // For nested properties
-        colPatient.setCellValueFactory(cellData ->
-                new SimpleStringProperty(cellData.getValue().getPatient().getName()));
+        colPatient.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPatient().getName()));
 
         colSession.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getTherapySession().getId()));
@@ -137,7 +136,6 @@ public class PaymentController implements Initializable {
             txtAmount.setText(String.valueOf(selectedPayment.getAmount()));
             datePickerPayment.setValue(LocalDate.parse(selectedPayment.getDate()));
 
-            // Select patient in combobox
             for (PatientDTO patient : cmbPatient.getItems()) {
                 if (patient.getId().equals(selectedPayment.getPatient().getId())) {
                     cmbPatient.getSelectionModel().select(patient);
@@ -145,7 +143,6 @@ public class PaymentController implements Initializable {
                 }
             }
 
-            // Select session in combobox
             for (TherapySessionDTO session : cmbSession.getItems()) {
                 if (session.getId().equals(selectedPayment.getTherapySession().getId())) {
                     cmbSession.getSelectionModel().select(session);
@@ -158,28 +155,75 @@ public class PaymentController implements Initializable {
     @FXML
     void processPayment(ActionEvent event) {
         try {
-            if (validateFields()) {
-                PaymentDTO paymentDTO = new PaymentDTO(
-                        lblPaymentId.getText(),
-                        Double.parseDouble(txtAmount.getText()),
-                        datePickerPayment.getValue().toString(),
-                        cmbPatient.getValue(),
-                        cmbSession.getValue()
+            // First validate required fields
+            if (!validateFields()) {
+                return; // Validation failed, exit early
+            }
+
+            // Get selected session with null check
+            TherapySessionDTO selectedSession = cmbSession.getSelectionModel().getSelectedItem();
+            if (selectedSession == null) {
+                new Alert(Alert.AlertType.WARNING, "Please select a therapy session!").show();
+                return;
+            }
+
+            // Get selected patient with null check
+            PatientDTO selectedPatient = cmbPatient.getValue();
+            if (selectedPatient == null) {
+                new Alert(Alert.AlertType.WARNING, "Please select a patient!").show();
+                return;
+            }
+
+            // Validate amount
+            double amount;
+            try {
+                amount = Double.parseDouble(txtAmount.getText());
+            } catch (NumberFormatException e) {
+                new Alert(Alert.AlertType.ERROR, "Please enter a valid amount!").show();
+                return;
+            }
+
+            // Validate date
+            if (datePickerPayment.getValue() == null) {
+                new Alert(Alert.AlertType.WARNING, "Please select a payment date!").show();
+                return;
+            }
+
+            // Create payment DTO
+            PaymentDTO paymentDTO = new PaymentDTO(
+                    lblPaymentId.getText(),
+                    amount,
+                    datePickerPayment.getValue().toString(),
+                    selectedPatient,
+                    selectedSession
+            );
+
+            // Save payment
+            if (paymentBO.save(paymentDTO)) {
+                new Alert(Alert.AlertType.INFORMATION, "Payment processed successfully!").show();
+                resetForm();
+                loadAllPayments();
+
+                // Update payment ID
+                paymentBO.getLastPK().ifPresentOrElse(
+                        id -> lblPaymentId.setText(id),
+                        () -> lblPaymentId.setText("0")
                 );
 
-                if (paymentBO.save(paymentDTO)) {
-                    new Alert(Alert.AlertType.INFORMATION, "Payment processed successfully!").show();
-                    resetForm();
-                    loadAllPayments();
-                    lblPaymentId.setText(paymentBO.getLastPK().orElse("0"));
-                } else {
-                    new Alert(Alert.AlertType.ERROR, "Failed to process payment!").show();
-                }
+                // Generate payment slip
+                generateSlip(selectedSession.getId());
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Failed to process payment!").show();
             }
         } catch (Exception e) {
             e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, "An error occurred: " + e.getMessage()).show();
+            new Alert(Alert.AlertType.ERROR, "An unexpected error occurred: " +
+                    (e.getMessage() != null ? e.getMessage() : "Check logs for details")).show();
         }
+    }
+
+    private void generateSlip(String sessionId) {
+       PaymentReport.generatePaymentSlip(sessionId);
     }
 
     @FXML

@@ -111,18 +111,25 @@ public class PaymentDAOImpl implements PaymentDAO {
     @Override
     public Optional<String> getLastPK() {
         try (Session session = factoryConfiguration.getSession()) {
-            Long lastPk = session
-                    .createQuery("SELECT p.id FROM Payment p ORDER BY p.id DESC", Long.class)
-                    .setMaxResults(1)
-                    .uniqueResult();
+            String lastPk = (String) session.createNativeQuery(
+                    "SELECT id FROM payments ORDER BY CAST(SUBSTRING(id, 2) AS UNSIGNED) DESC LIMIT 1"
+            ).uniqueResult();
 
-            Long newPk = (lastPk != null) ? lastPk + 1 : 1;
-            return Optional.of(String.valueOf(newPk));
+            if (lastPk != null) {
+                int number = Integer.parseInt(lastPk.substring(1));
+                number++;
+                String newPk = String.format("P%03d", number);
+                return Optional.of(newPk);
+            } else {
+                return Optional.of("P001");
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return Optional.empty();
         }
     }
+
+
 
     @Override
     public boolean exist(String id) throws SQLException, ClassNotFoundException {
