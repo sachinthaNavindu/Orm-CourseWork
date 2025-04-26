@@ -155,26 +155,22 @@ public class PaymentController implements Initializable {
     @FXML
     void processPayment(ActionEvent event) {
         try {
-            // First validate required fields
             if (!validateFields()) {
-                return; // Validation failed, exit early
+                return;
             }
 
-            // Get selected session with null check
             TherapySessionDTO selectedSession = cmbSession.getSelectionModel().getSelectedItem();
             if (selectedSession == null) {
                 new Alert(Alert.AlertType.WARNING, "Please select a therapy session!").show();
                 return;
             }
 
-            // Get selected patient with null check
             PatientDTO selectedPatient = cmbPatient.getValue();
             if (selectedPatient == null) {
                 new Alert(Alert.AlertType.WARNING, "Please select a patient!").show();
                 return;
             }
 
-            // Validate amount
             double amount;
             try {
                 amount = Double.parseDouble(txtAmount.getText());
@@ -183,13 +179,11 @@ public class PaymentController implements Initializable {
                 return;
             }
 
-            // Validate date
             if (datePickerPayment.getValue() == null) {
                 new Alert(Alert.AlertType.WARNING, "Please select a payment date!").show();
                 return;
             }
 
-            // Create payment DTO
             PaymentDTO paymentDTO = new PaymentDTO(
                     lblPaymentId.getText(),
                     amount,
@@ -198,19 +192,16 @@ public class PaymentController implements Initializable {
                     selectedSession
             );
 
-            // Save payment
             if (paymentBO.save(paymentDTO)) {
                 new Alert(Alert.AlertType.INFORMATION, "Payment processed successfully!").show();
                 resetForm();
                 loadAllPayments();
 
-                // Update payment ID
                 paymentBO.getLastPK().ifPresentOrElse(
                         id -> lblPaymentId.setText(id),
                         () -> lblPaymentId.setText("0")
                 );
 
-                // Generate payment slip
                 generateSlip(selectedSession.getId());
             } else {
                 new Alert(Alert.AlertType.ERROR, "Failed to process payment!").show();

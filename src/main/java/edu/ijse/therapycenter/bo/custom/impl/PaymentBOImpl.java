@@ -22,7 +22,6 @@ public class PaymentBOImpl implements PaymentBO {
     @Override
     public boolean save(PaymentDTO dto) {
         try {
-            // Direct conversion in the save method
             Patient patient = new Patient();
             patient.setId(dto.getPatient().getId());
 
@@ -47,7 +46,6 @@ public class PaymentBOImpl implements PaymentBO {
     @Override
     public boolean update(PaymentDTO dto) {
         try {
-            // Direct conversion in the update method
             Patient patient = new Patient();
             patient.setId(dto.getPatient().getId());
 
@@ -78,7 +76,6 @@ public class PaymentBOImpl implements PaymentBO {
     public List<PaymentDTO> getAll() {
         return paymentDAO.getAll().stream()
                 .map(entity -> {
-                    // Direct conversion in the getAll method
                     PaymentDTO dto = new PaymentDTO();
                     dto.setId(entity.getId());
                     dto.setAmount(entity.getAmount());
@@ -101,7 +98,6 @@ public class PaymentBOImpl implements PaymentBO {
     public Optional<PaymentDTO> findByPK(String pk) {
         return paymentDAO.findByPK(pk)
                 .map(entity -> {
-                    // Direct conversion in the findByPK method
                     PaymentDTO dto = new PaymentDTO();
                     dto.setId(entity.getId());
                     dto.setAmount(entity.getAmount());

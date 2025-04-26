@@ -21,7 +21,7 @@ public class PaymentReport {
             Session session = FactoryConfiguration.getInstance().getSession();
 
             Map<String, Object> parameters = new HashMap<>();
-            parameters.put("sessionId", sessionId); // Pass the sessionId as parameter
+            parameters.put("sessionId", sessionId);
 
             session.doWork(new Work() {
                 @Override
